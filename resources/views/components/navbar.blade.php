@@ -24,9 +24,16 @@
       <li class="nav-item">
       <form method="POST" action="{{ route('logout') }}">
         @csrf
-      <button type="submit">Logout</button>
-    </form>
+      <button type="submit">Logout</button>    
+      </form>
       </li>
+
+      @if(auth()->check() && auth()->user()->is_admin)
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.dashboard') }}">Admin</a>
+        </li>
+    @endif
+      
     </ul>
 
   

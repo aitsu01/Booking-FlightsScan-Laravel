@@ -11,7 +11,8 @@ class AirlineController extends Controller
      */
     public function index()
     {
-        //
+        $airlines = Airline::all();
+        return view('airlines.index', compact('airlines'));
     }
 
     /**
@@ -19,7 +20,7 @@ class AirlineController extends Controller
      */
     public function create()
     {
-        //
+        return view('airlines.create');
     }
 
     /**
@@ -27,8 +28,17 @@ class AirlineController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nome_compagnia' => 'required|string|max:255',
+        ]);
+
+        Airline::create([
+            'nome_compagnia' => $request->nome_compagnia,
+        ]);
+
+        return redirect()->route('airlines.index')->with('success', 'Compagnia creata con successo!');
     }
+    
 
     /**
      * Display the specified resource.
@@ -41,24 +51,33 @@ class AirlineController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Airline $airline)
     {
-        //
+        return view('airlines.edit', compact('airline'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Airline $airline)
     {
-        //
+        $request->validate([
+            'nome_compagnia' => 'required|string|max:255',
+        ]);
+
+        $airline->update([
+            'nome_compagnia' => $request->nome_compagnia,
+        ]);
+
+        return redirect()->route('airlines.index')->with('success', 'Compagnia aggiornata!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Airline $airline)
     {
-        //
+        $airline->delete();
+        return redirect()->route('airlines.index')->with('success', 'Compagnia eliminata!');
     }
 }

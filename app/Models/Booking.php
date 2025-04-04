@@ -8,6 +8,7 @@ class Booking extends Model
 {
     public function user(){
         return $this->belongsTo(User::class);
+        
     }
     
     public function flight(){
@@ -19,7 +20,8 @@ class Booking extends Model
     }
     
     public function extras(){
-        return $this->belongsToMany(Extra::class)->withPivot('quantità');
+        
+        return $this->belongsToMany(Extra::class, 'booking_extra')->withPivot('quantita')->withTimestamps();
     }
     
 }

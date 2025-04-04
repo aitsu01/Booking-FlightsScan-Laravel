@@ -12,10 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('booking_extra', function (Blueprint $table) {
-            $table->foreignId('booking_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('extra_id')->constrained()->cascadeOnDelete();
-            $table->integer('quantità')->default(1);
-            $table->primary(['booking_id', 'extra_id']);
+            $table->id();
+            $table->foreignId('booking_id')->constrained()->onDelete('cascade');
+            $table->foreignId('extra_id')->constrained()->onDelete('cascade');
+            $table->integer('quantita')->default(1);
+            $table->timestamps();
         });
     }
 
