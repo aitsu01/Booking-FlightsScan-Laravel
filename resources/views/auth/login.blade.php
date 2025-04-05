@@ -1,12 +1,20 @@
-<!-- resources/views/auth/login.blade.php -->
-<h2>Login</h2>
-<form method="POST" action="{{ route('login') }}">
-    @csrf
-    <label>Email</label>
-    <input type="email" name="email" required>
-    
-    <label>Password</label>
-    <input type="password" name="password" required>
+<x-layout>
+<div class="login-container">
+        <h2>Accedi al tuo account</h2>
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
 
-    <button type="submit">Login</button>
-</form>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" required>
+
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" required>
+
+            <button type="submit">Entra</button>
+
+            <div class="extra-links">
+                <a href="{{ route('register') }}">Non hai un account? Registrati</a>
+            </div>
+        </form>
+    </div>
+</x-layout>

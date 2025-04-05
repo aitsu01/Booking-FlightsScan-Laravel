@@ -3,25 +3,198 @@
 
 
 .full-page-center {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    width: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
 }
 
 
 
-.navbar {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    min-height: 80px; /* Altezza minima aumentata */
+
+
+
+
+
+
+.navbar-nav .nav-link {
+  transition: all 0.2s ease-in-out;
+  font-weight: 500;
+  color: #333;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #0078d4;
+  transform: translateY(-1px);
+}
+
+.navbar-brand {
+  font-size: 1.4rem;
+}
+
+.active-link {
+  position: relative;
+}
+
+.active-link::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #0078d4;
+  transition: width 0.3s;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.active-link:hover::after {
+  width: 100%;
+}
+
+.logout-link {
+  background: none;
+  border: none;
+  color: #dc3545;
+  padding: 0;
+  font-weight: 500;
+}
+
+.logout-link:hover {
+  text-decoration: underline;
+  color: #bb2d3b;
+}
+
+@media (max-width: 991px) {
+  .navbar-nav .nav-link,
+  .logout-link {
+    padding-left: 1rem;
   }
-  
-  .nav-link {
-    transition: all 0.3s ease;
+}
+
+
+
+
+/*hero section o welcome css*/
+
+
+ header {
+  background: url('https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=1500&q=80') no-repeat center center;
+  background-size: cover;
+  position: relative;
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+header .text-center {
+  position: relative;
+  z-index: 2;
+}
+
+header h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.lead {
+  color: #e0f7fa;
+  font-size: 1.2rem;
+}
+
+/* === Flight Cards === */
+.card {
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-title {
+  color: #0078d4;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background-color: #0078d4;
+  border-color: #0078d4;
+}
+
+.btn-primary:hover {
+  background-color: #005ea6;
+  border-color: #005ea6;
+}
+
+/* === Form styling === */
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.form-group {
+  flex: 1;
+  min-width: 200px;
+}
+
+@media (max-width: 768px) {
+  header h1 {
+      font-size: 2rem;
   }
-  
-  .nav-link:hover {
-    transform: translateY(-2px);
+  .form-row {
+      flex-direction: column;
   }
+}
+
+
+
+/*footer*/
+
+.footer h5 {
+  color: #f0f9ff;
+}
+
+.footer-img-wrap {
+  width: 80px;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.footer-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease-in-out;
+}
+
+.footer-img:hover {
+  transform: scale(1.1);
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .footer-img-wrap {
+      width: 100px;
+      height: 70px;
+      margin-bottom: 10px;
+  }
+
+  .d-flex.flex-wrap {
+      justify-content: center;
+  }
+}
