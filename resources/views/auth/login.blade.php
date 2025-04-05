@@ -1,20 +1,24 @@
 <x-layout>
-<div class="login-container">
-        <h2>Accedi al tuo account</h2>
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
+<div class="auth-wrapper">
+    <div class="login-container">
+      <h2>Accedi al tuo account</h2>
 
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" required>
+      <form method="POST" action="{{ route('login') }}">
+        @csrf
 
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" required>
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" required>
 
-            <button type="submit">Entra</button>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required>
 
-            <div class="extra-links">
-                <a href="{{ route('register') }}">Non hai un account? Registrati</a>
-            </div>
-        </form>
+        <button type="submit">Entra</button>
+
+        <div class="extra-links">
+          <a href="{{ route('register') }}">Non hai un account? Registrati</a>
+        </div>
+      </form>
     </div>
+  </div>
 </x-layout>
+

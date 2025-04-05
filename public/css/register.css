@@ -1,75 +1,82 @@
-.register-container {
-    background-color: #fff;
-    padding: 2.5rem 3rem;
-    border-radius: 15px;
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.05);
+.auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right, #e6f0ff, #ffffff);
+    padding: 2rem;
+  }
+
+  .register-container {
+    background-color: #ffffff;
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
+    max-width: 450px;
     width: 100%;
-    max-width: 500px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
   }
-  
-  h2 {
+
+  .register-container h2 {
     text-align: center;
-    color: #0078d4;
     margin-bottom: 1.5rem;
+    color: #0d6efd;
   }
-  
-  label {
+
+  .register-container label {
     display: block;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.5rem;
     font-weight: 600;
     color: #333;
   }
-  
-  input {
+
+  .register-container input {
     width: 100%;
     padding: 0.75rem;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.2rem;
     border: 1px solid #ccc;
     border-radius: 8px;
-    font-size: 1rem;
+    transition: border-color 0.3s;
   }
-  
-  button {
+
+  .register-container input:focus {
+    border-color: #0d6efd;
+    outline: none;
+  }
+
+  .register-container button {
     width: 100%;
-    background-color: #0078d4;
-    color: white;
+    padding: 0.75rem;
+    background-color: #0d6efd;
     border: none;
-    padding: 0.9rem;
-    font-size: 1rem;
     border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    color: #fff;
+    font-weight: 600;
+    transition: background-color 0.3s;
   }
-  
-  button:hover {
-    background-color: #005ea6;
+
+  .register-container button:hover {
+    background-color: #0b5ed7;
   }
-  
+
   .extra-links {
-    text-align: center;
     margin-top: 1rem;
+    text-align: center;
   }
-  
+
   .extra-links a {
-    color: #0078d4;
     text-decoration: none;
-    font-size: 0.9rem;
+    color: #0d6efd;
+    font-weight: 500;
   }
-  
+
   .extra-links a:hover {
     text-decoration: underline;
   }
-  
-  ul {
-    background-color: #f8d7da;
-    border: 1px solid #f5c2c7;
-    color: #842029;
-    padding: 1rem;
-    border-radius: 8px;
-    margin-bottom: 1.5rem;
-  }
-  
-  ul li {
-    list-style-type: square;
-    margin-left: 1rem;
+
+  .register-container ul {
+    padding: 0;
+    list-style: none;
+    margin-bottom: 1rem;
+    color: red;
+    font-size: 0.9rem;
   }
