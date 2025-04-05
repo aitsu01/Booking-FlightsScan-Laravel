@@ -14,5 +14,7 @@ class IsAdmin
         }
 
         abort(403, 'Accesso non autorizzato.');
+
+      
     }
 }

@@ -15,9 +15,23 @@ return new class extends Migration
             $table->id();
             $table->foreignId('booking_id')->constrained()->onDelete('cascade');
             $table->foreignId('extra_id')->constrained()->onDelete('cascade');
-            $table->integer('quantita')->default(1);
+            $table->integer('quantità')->default(1);
             $table->timestamps();
         });
+
+
+        
+
+        /*Schema::create('booking_extra', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('booking_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('extra_id')->constrained()->cascadeOnDelete();
+            $table->integer('quantita')->default(1);
+            $table->timestamps();
+        });*/
+
+
+
     }
 
     /**

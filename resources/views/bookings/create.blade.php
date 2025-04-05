@@ -50,7 +50,7 @@
         </label>
 
         <label>Quantità:</label>
-        <input type="number" name="extras[{{ $extra->id }}][quantita]" value="1" min="1" style="width: 60px;">
+        <input type="number" name="extras[{{ $extra->id }}][quantità]" value="1" min="1" style="width: 60px;">
         </div>
         @endforeach
 

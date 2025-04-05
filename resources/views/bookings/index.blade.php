@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<x-layout>
     <h2>Le tue Prenotazioni</h2>
 
     @if(session('success'))
@@ -16,6 +14,10 @@
             <p><strong>Ora:</strong> {{ $booking->flight->ora_partenza }} - {{ $booking->flight->ora_arrivo }}</p>
             <p><strong>Stato:</strong> {{ $booking->stato }}</p>
             <a href="{{ route('bookings.show', $booking) }}">📄 Dettagli</a>
+            <a href="{{ route('booking.extras.edit', $booking) }}" class="btn btn-sm btn-info">📝 Aggiungi/Modifica Extra</a>
+
+            
+            
 
             <form action="{{ route('bookings.destroy', $booking) }}" method="POST" style="display:inline;">
                 @csrf
@@ -24,4 +26,4 @@
             </form>
         </div>
     @endforeach
-@endsection
+</x-layout>

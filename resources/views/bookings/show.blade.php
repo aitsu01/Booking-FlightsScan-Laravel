@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<x-layout>
     <h2>Dettagli Prenotazione</h2>
 
     <p><strong>Volo:</strong> {{ $booking->flight->aeroporto_partenza }} → {{ $booking->flight->aeroporto_arrivo }}</p>
@@ -30,4 +28,5 @@
 
 
     <a href="{{ route('bookings.index') }}">⬅️ Torna alle prenotazioni</a>
-@endsection
+</x-layout>
+

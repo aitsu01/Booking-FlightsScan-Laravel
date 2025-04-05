@@ -34,6 +34,18 @@
           <li class="nav-item">
             <span class="nav-link">Ciao, {{ auth()->user()->name }}</span>
           </li>
+          @auth
+       @if(!auth()->user()->is_admin)
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('flights.search') }}">Trova il tuo volo</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('bookings.index') }}">Le tue prenotazioni</a>
+        </li>
+       @endif
+       @endauth
+
           <li class="nav-item">
             <form method="POST" action="{{ route('logout') }}">
               @csrf

@@ -2,12 +2,27 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Booking extends Model
+
 {
+
+    use HasFactory;
+    protected $fillable = [
+        'user_id', 
+        'flight_id', 
+        'data_prenotazione', 
+        'stato'
+    ];
+
+   
+
+
     public function user(){
         return $this->belongsTo(User::class);
+        
         
     }
     
@@ -20,8 +35,12 @@ class Booking extends Model
     }
     
     public function extras(){
+
+        return $this->belongsToMany(Extra::class, 'booking_extra')
+                    ->withPivot('quantità')
+                    ->withTimestamps();
         
-        return $this->belongsToMany(Extra::class, 'booking_extra')->withPivot('quantita')->withTimestamps();
+        
     }
     
 }
