@@ -27,7 +27,7 @@
         </div>
         </div>
 
-        <button type="button" class="btn btn-secondary my-2" id="addPasseggero">➕ Aggiungi passeggero</button>
+        <button type="button" class="btn btn-secondary my-2" id="addPasseggero">+ Aggiungi passeggero</button>
 
        
        

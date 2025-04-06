@@ -26,7 +26,11 @@ class Passenger extends Model
     protected static function booted()
 {
     static::creating(function ($passenger) {
-        $passenger->pnr = strtoupper(uniqid('PNR'));
+        do {
+            $pnr = strtoupper(substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 6));
+        } while (Passenger::where('pnr', $pnr)->exists());
+
+        $passenger->pnr = $pnr;
     });
 }
 
