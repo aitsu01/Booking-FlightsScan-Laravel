@@ -29,59 +29,71 @@ class BookingController extends Controller
      * Show the form for creating a new resource.
      */
     public function create(Flight $flight)
-    {
+    { 
+
+        
         $extras = Extra::all();
     
-        // Passa il volo e gli extra alla vista
+        
         return view('booking.create', compact('flight', 'extras'));
         /*return view('booking.create', compact('flight'));*/
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    
+
+
     public function store(Request $request)
-    {
-        // Validazione dei dati; aggiungi ulteriori regole se necessario
-        $request->validate([
-            'flight_id' => 'required|exists:flights,id',
-            // Se vuoi validare i dati dei passeggeri, puoi aggiungere le regole qui
-        ]);
+{
 
-        // Crea la prenotazione
-        $booking = Booking::create([
-            'user_id'           => Auth::id(),
-            'flight_id'         => $request->flight_id,
-            'data_prenotazione' => now(),
-            'stato'             => 'confermato',
-        ]);
+    $request->validate([
+        'flight_id' => 'required|exists:flights,id',
+        'passengers.*.nome' => 'required|string|max:255',
+        'passengers.*.cognome' => 'required|string|max:255',
+        'passengers.*.data_nascita' => 'required|date',
+    ]);
 
-        // Salva i passeggeri associati, se presenti
-        if ($request->has('passengers')) {
-            foreach ($request->passengers as $passengerData) {
-                Passenger::create(array_merge($passengerData, ['booking_id' => $booking->id]));
-            }
+    $booking = Booking::create([
+        'user_id' => Auth::id(),
+        'flight_id' => $request->flight_id,
+        'data_prenotazione' => now(),
+        'stato' => 'confermato',
+    ]);
+
+    foreach ($request->passengers as $passengerData) {
+        $exists = Passenger::where('nome', $passengerData['nome'])
+            ->where('cognome', $passengerData['cognome'])
+            ->where('booking_id', $booking->id)
+            ->exists();
+
+        if (!$exists) {
+            Passenger::create([
+                'nome' => $passengerData['nome'],
+                'cognome' => $passengerData['cognome'],
+                'data_nascita' => $passengerData['data_nascita'],
+                'booking_id' => $booking->id,
+                'flight_id' => $booking->flight_id,
+            ]);
         }
-
-        // Associa gli extra, se presenti
-        if ($request->has('extras')) {
-            foreach ($request->extras as $extra_id => $data) {
-                if (isset($data['checked']) && $data['checked']) {
-                    $quantita = isset($data['quantita']) ? intval($data['quantita']) : 1;
-                    $booking->extras()->attach($extra_id, ['quantita' => $quantita]);
-                    
-                }
-            }
-        }
-
-
-        return redirect()->route('bookings.index')
-                         ->with('success', 'Prenotazione effettuata con successo!');
     }
 
-    /**
-     * Display the specified resource.
-     */
+    if ($request->has('extras')) {
+        foreach ($request->extras as $extra_id => $data) {
+            if (!empty($data['checked'])) {
+                $quantita = isset($data['quantita']) ? intval($data['quantita']) : 1;
+                $booking->extras()->attach($extra_id, ['quantita' => $quantita]);
+            }
+        }
+    }
+ 
+
+    return redirect()->route('bookings.index')->with('success', 'Prenotazione effettuata con successo!');
+}
+
+
+
+
+
+    
     public function show(Booking $booking)
     {
         $this->authorize('view', $booking); // Se usi policy

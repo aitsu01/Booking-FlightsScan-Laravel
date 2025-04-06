@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nome');
             $table->string('cognome');
             $table->date('data_nascita');
+            $table->unique(['nome', 'cognome', 'flight_id']);
 
             $table->timestamps();
         });

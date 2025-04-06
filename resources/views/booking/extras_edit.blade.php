@@ -3,6 +3,11 @@
 <x-layout>
 <div class="container">
     <h1>Aggiorna Extra per la Prenotazione #{{ $booking->id }}</h1>
+    <div id="extraNotice" class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Nota:</strong> Puoi solo <u>aggiungere</u> nuovi extra. Quelli già selezionati non possono essere rimossi da qui.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Chiudi"></button>
+    </div>
+
 
     <form action="{{ route('booking.extras.update', $booking) }}" method="POST">
         @csrf

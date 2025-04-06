@@ -16,21 +16,21 @@
         @csrf
         <input type="hidden" name="flight_id" value="{{ $flight->id }}">
 
+        <div id="passeggeri-container">
+        <div class="form-group">
+        <label>Nome Passeggero</label>
+        <input type="text" name="passengers[0][nome]" required>
+        <label>Cognome</label>
+        <input type="text" name="passengers[0][cognome]" required>
+        <label>Data di Nascita</label>
+        <input type="date" name="passengers[0][data_nascita]" required>
+        </div>
+        </div>
+
+        <button type="button" class="btn btn-secondary my-2" id="addPasseggero">➕ Aggiungi passeggero</button>
+
        
-        <div class="form-group">
-            <label for="nome">Nome Passeggero:</label>
-            <input type="text" name="passengers[0][nome]" id="nome" class="form-control" required>
-        </div>
-
-        <div class="form-group">
-            <label for="cognome">Cognome Passeggero:</label>
-            <input type="text" name="passengers[0][cognome]" id="cognome" class="form-control" required>
-        </div>
-
-        <div class="form-group">
-    <label for="data_nascita">Data di Nascita:</label>
-    <input type="date" class="form-control" name="passengers[0][data_nascita]" id="data_nascita" required>
-    </div>
+       
 
     <!-- Sezione per gli extra -->
     <h3>Seleziona Extra</h3>
@@ -50,5 +50,44 @@
         <button type="submit" class="btn btn-primary mt-2">Conferma Prenotazione</button>
     </form>
 </div>
+<script>
+    let index = 1;
+
+document.getElementById('addPasseggero').addEventListener('click', function () {
+    const container = document.getElementById('passeggeri-container');
+    const html = `
+        <div class="form-group mt-3 passeggero border rounded p-3 mb-2">
+            <label>Nome Passeggero</label>
+            <input type="text" name="passengers[${index}][nome]" required class="form-control mb-2">
+            
+            <label>Cognome</label>
+            <input type="text" name="passengers[${index}][cognome]" required class="form-control mb-2">
+            
+            <label>Data di Nascita</label>
+            <input type="date" name="passengers[${index}][data_nascita]" required class="form-control mb-2">
+
+            <button type="button" class="btn btn-danger btn-sm removePasseggero">➖ Rimuovi</button>
+        </div>`;
+    container.insertAdjacentHTML('beforeend', html);
+    index++;
+});
+
+// Rimuovi un passeggero
+document.getElementById('passeggeri-container').addEventListener('click', function (e) {
+    if (e.target.classList.contains('removePasseggero')) {
+        e.target.closest('.passeggero').remove();
+    }
+});
+
+</script>
+
+
+
+
+
+
+
+
+
 </x-layout>
 

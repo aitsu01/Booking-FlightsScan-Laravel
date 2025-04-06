@@ -6,12 +6,18 @@
     <p><strong>Orario:</strong> {{ $booking->flight->ora_partenza }} - {{ $booking->flight->ora_arrivo }}</p>
     <p><strong>Prezzo Base:</strong> €{{ $booking->flight->prezzo_base }}</p>
 
-    <h4>Passeggeri:</h4>
-    <ul>
-        @foreach($booking->passengers as $passenger)
-            <li>{{ $passenger->nome }} {{ $passenger->cognome }} ({{ $passenger->data_nascita }})</li>
-        @endforeach
+    
+
+    <h4>Passeggeri</h4>
+     <ul class="list-group">
+    @foreach($booking->passengers as $passenger)
+        <li class="list-group-item">
+            {{ $passenger->nome }} {{ $passenger->cognome }} — <strong>PNR:</strong> {{ $passenger->pnr }}
+        </li>
+    @endforeach
     </ul>
+
+
     <h4>Extra inclusi nella prenotazione</h4>
 
 @if($booking->extras->isNotEmpty())
@@ -30,7 +36,6 @@
 @endif
 
 
-    
 
 
 
@@ -50,22 +55,6 @@
 </div>
 
 
-
-
-
-    <!--<h4>Extra selezionati:</h4>
-
-    @if($booking->extras->isEmpty())
-    <p>Nessun extra selezionato.</p>
-    @else
-    <ul>
-        @foreach($booking->extras as $extra)
-            <li>
-                {{ $extra->nome_extra }} ({{ $extra->pivot->quantita }}x) - Totale: €{{ $extra->prezzo * $extra->pivot->quantita }}
-            </li>
-        @endforeach
-    </ul>
-    @endif-->
 
 
     <a href="{{ route('bookings.index') }}">⬅️ Torna alle prenotazioni</a>
