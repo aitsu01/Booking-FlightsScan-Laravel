@@ -20,8 +20,8 @@
                         {{ $extra->nome_extra }} ({{ $extra->prezzo_extra }} €)
                     </label>
                     <input type="number" 
-                           name="extras[{{ $extra->id }}][quantità]" 
-                           value="{{ optional($booking->extras->find($extra->id))->pivot->quantità ?? 1 }}" 
+                           name="extras[{{ $extra->id }}][quantita]" 
+                           value="{{ optional($booking->extras->find($extra->id))->pivot->quantita ?? 1 }}" 
                            min="1" 
                            class="form-control" 
                            style="width: 100px; display:inline-block;">

@@ -67,11 +67,13 @@ class BookingController extends Controller
         if ($request->has('extras')) {
             foreach ($request->extras as $extra_id => $data) {
                 if (isset($data['checked']) && $data['checked']) {
-                    $quantita = isset($data['quantità']) ? intval($data['quantità']) : 1;
-                    $booking->extras()->attach($extra_id, ['quantità' => $quantita]);
+                    $quantita = isset($data['quantita']) ? intval($data['quantita']) : 1;
+                    $booking->extras()->attach($extra_id, ['quantita' => $quantita]);
+                    
                 }
             }
         }
+
 
         return redirect()->route('bookings.index')
                          ->with('success', 'Prenotazione effettuata con successo!');
@@ -143,8 +145,8 @@ class BookingController extends Controller
         $data = [];
         foreach ($request->extras as $extra_id => $extraData) {
             if (isset($extraData['checked']) && $extraData['checked']) {
-                $quantita = isset($extraData['quantità']) ? intval($extraData['quantità']) : 1;
-                $data[$extra_id] = ['quantità' => $quantita];
+                $quantita = isset($extraData['quantita']) ? intval($extraData['quantita']) : 1;
+                $data[$extra_id] = ['quantita' => $quantita];
             }
         }
         // Aggiorna gli extra associati alla prenotazione senza rimuovere quelli già esistenti, o usa sync se vuoi sostituirli

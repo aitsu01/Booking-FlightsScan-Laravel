@@ -37,8 +37,10 @@ class Booking extends Model
     public function extras(){
 
         return $this->belongsToMany(Extra::class, 'booking_extra')
-                    ->withPivot('quantità')
+                    ->withPivot('quantita')
                     ->withTimestamps();
+
+                               
         
         
     }
