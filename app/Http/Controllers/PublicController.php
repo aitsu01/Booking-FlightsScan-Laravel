@@ -9,7 +9,9 @@ class PublicController extends Controller
 {
     public function homepage() {
 
-        $latestFlights = \App\Models\Flight::orderBy('created_at', 'desc')->take(6)->get();
+        /*$latestFlights = \App\Models\Flight::orderBy('created_at', 'desc')->take(6)->get();*/
+        
+    $latestFlights = \App\Models\Flight::orderBy('created_at', 'desc')->take(12)->get();
         return view('welcome', compact('latestFlights'));
         /*return view('welcome');*/
 

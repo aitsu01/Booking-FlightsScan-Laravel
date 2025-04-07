@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\BookingController;
+
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AirlineController;
 use App\Http\Controllers\Admin\FlightController;
@@ -20,18 +21,35 @@ Route::middleware('auth')->group(function () {
     })->name('admin.dashboard');
 
 
+    Route::middleware(['auth', 'is_admin'])->group(function () {
+        
+        Route::resource('/admin/airlines', AirlineController::class, ['as' => 'admin']);
+        Route::resource('/admin/flights', FlightController::class, ['as' => 'admin']);
+        Route::resource('/admin/extras', ExtraController::class, ['as' => 'admin']);
+        Route::resource('/admin/statistics', DashboardController::class, ['as' => 'admin']);
+        
+
+
+    });
+
 
 
     Route::middleware(['auth', 'is_admin'])->group(function () {
         Route::resource('/admin/flights', FlightController::class, ['as' => 'admin']);
     });
 
-
-    
+  
      // Solo admin può gestire queste risorse
      Route::resource('/admin/airlines', AirlineController::class, ['as' => 'admin']);
      Route::resource('/admin/flights', FlightController::class, ['as' => 'admin']);
      Route::resource('/admin/extras', ExtraController::class, ['as' => 'admin']);
+     Route::get('/admin/statistics', [DashboardController::class, 'statistics'])->name('admin.statistics.index');
+
+
+
+
+
+     
  });
 
 
@@ -41,6 +59,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('bookings', BookingController::class);
     Route::get('/booking/create/{flight}', [BookingController::class, 'create'])->name('booking.create');
     Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
+
+    Route::get('bookings/{booking}/pdf', [BookingController::class, 'downloadPdf'])->name('bookings.pdf');
+    
+
 
     // Gestione extra post-prenotazione
     Route::get('/booking/{booking}/extras', [BookingController::class, 'editExtras'])->name('booking.extras.edit');

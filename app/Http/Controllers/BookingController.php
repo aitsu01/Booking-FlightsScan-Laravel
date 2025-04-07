@@ -8,14 +8,12 @@ use App\Models\Passenger;
 use App\Models\Extra;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 class BookingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
         $bookings = Booking::with('flight', 'passengers')
@@ -25,9 +23,7 @@ class BookingController extends Controller
         return view('bookings.index', compact('bookings'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    
     public function create(Flight $flight)
     { 
 
@@ -50,6 +46,9 @@ class BookingController extends Controller
         'passengers.*.nome' => 'required|string|max:255',
         'passengers.*.cognome' => 'required|string|max:255',
         'passengers.*.data_nascita' => 'required|date',
+        'passengers.*.sesso' => 'required|string|in:Uomo,Donna',
+        'passengers.*.nazionalita' => 'required|string',
+
     ]);
 
     $booking = Booking::create([
@@ -58,6 +57,7 @@ class BookingController extends Controller
         'data_prenotazione' => now(),
         'stato' => 'confermato',
     ]);
+
 
     foreach ($request->passengers as $passengerData) {
         $exists = Passenger::where('nome', $passengerData['nome'])
@@ -70,6 +70,8 @@ class BookingController extends Controller
                 'nome' => $passengerData['nome'],
                 'cognome' => $passengerData['cognome'],
                 'data_nascita' => $passengerData['data_nascita'],
+                'sesso' => $passengerData['sesso'],
+                'nazionalita' => $passengerData['nazionalita'],
                 'booking_id' => $booking->id,
                 'flight_id' => $booking->flight_id,
             ]);
@@ -89,10 +91,6 @@ class BookingController extends Controller
     return redirect()->route('bookings.index')->with('success', 'Prenotazione effettuata con successo!');
 }
 
-
-
-
-
     
     public function show(Booking $booking)
     {
@@ -101,36 +99,30 @@ class BookingController extends Controller
         return view('bookings.show', compact('booking'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    
     public function edit(Booking $booking)
     {
         return view('bookings.edit', compact('booking'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    
     public function update(Request $request, Booking $booking)
     {
         $request->validate([
             'flight_id' => 'required|exists:flights,id',
-            // Altre regole se necessarie
+            
         ]);
 
         $booking->update([
             'flight_id' => $request->flight_id,
-            // Aggiungi altri campi da aggiornare, se presenti
+            
         ]);
 
         return redirect()->route('bookings.index')
                          ->with('success', 'Prenotazione aggiornata con successo!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+   
     public function destroy(Booking $booking)
     {
         $this->authorize('delete', $booking); // Se usi policy
@@ -142,9 +134,9 @@ class BookingController extends Controller
 
     public function editExtras(Booking $booking)
     {
-    // Carica la prenotazione con gli extra già associati, se necessario
+    
     $booking->load('extras');
-    // Recupera tutti gli extra disponibili per l'aggiornamento
+    
     $extras = \App\Models\Extra::all();
     return view('booking.extras_edit', compact('booking', 'extras'));
     }
@@ -165,6 +157,14 @@ class BookingController extends Controller
         $booking->extras()->syncWithoutDetaching($data);
     }
     return redirect()->route('bookings.show', $booking)->with('success', 'Extra aggiornati con successo!');
+    }
+
+
+    public function downloadPdf(Booking $booking)
+    {
+    $booking->load('flight', 'passengers', 'extras');
+    $pdf = Pdf::loadView('bookings.pdf', compact('booking'));
+    return $pdf->download('prenotazione_'.$booking->id.'.pdf');
     }
 
 }

@@ -53,6 +53,7 @@
     <hr>
     <strong>TOTALE:</strong> €{{ number_format($totale, 2, ',', '.') }}
 </div>
+<a href="{{ route('bookings.pdf', $booking) }}" class="btn btn-outline-primary">📄 Scarica PDF</a>
 
 
 

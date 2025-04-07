@@ -2,6 +2,7 @@
 <div class="container">
     <h1>Elenco Compagnie Aeree</h1>
     <a href="{{ route('admin.airlines.create') }}" class="btn btn-primary mb-3">Aggiungi Nuova Compagnia</a>
+    <a href="{{ route('admin.dashboard') }}" class="btn btn-info mb-3">Torna indietro</a>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>

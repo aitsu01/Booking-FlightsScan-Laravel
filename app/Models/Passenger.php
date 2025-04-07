@@ -15,6 +15,8 @@ class Passenger extends Model
                          'data_nascita',
                          'booking_id',
                         'flight_id',
+                        'sesso',
+                        'nazionalita',
                         'pnr'
                          ];
 

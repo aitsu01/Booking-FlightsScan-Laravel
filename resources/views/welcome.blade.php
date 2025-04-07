@@ -25,6 +25,7 @@
     </header>
 
     <!-- LAST MINUTE VOLI -->
+    @if(!auth()->check() || !auth()->user()->is_admin)
     <div class="container my-5">
         <h2 class="mb-4 text-center">✈️ Offerte Last Minute</h2>
         @if($latestFlights->isNotEmpty())
@@ -33,11 +34,12 @@
                     <div class="col-md-4 mb-4">
                         <div class="card h-100">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $flight->nome ?? 'Volo #' . $flight->id }}</h5>
+                                <h5 class="card-title">{{ $flight->nome ?? 'Offerta Volo ' . $flight->id }}</h5>
                                 <p class="card-text">
+                                    <strong>Compagnia:</strong> {{ $flight->airline->nome_compagnia }}<br>
                                     <strong>Partenza:</strong> {{ $flight->aeroporto_partenza }}<br>
                                     <strong>Arrivo:</strong> {{ $flight->aeroporto_arrivo }}<br>
-                                    <strong>Data:</strong> {{ $flight->data_partenza }}
+                                    <strong>Data:</strong> {{ \Carbon\Carbon::parse($flight->data_partenza)->format('d/m/Y') }}
                                 </p>
                                 <a href="{{ route('flights.show', $flight) }}" class="btn btn-outline-primary btn-sm">Dettagli</a>
                             </div>
@@ -49,4 +51,12 @@
             <p class="text-center text-muted">🚫 Nessun volo disponibile al momento.</p>
         @endif
     </div>
+@endif
+
+   
+
+    
+
+
+
 </x-layout>

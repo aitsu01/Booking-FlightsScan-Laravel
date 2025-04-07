@@ -9,5 +9,8 @@ export default defineConfig({
             refresh: true,
         }),
         tailwindcss(),
+        server.hmr.overlay = false,
     ],
+
+    
 });

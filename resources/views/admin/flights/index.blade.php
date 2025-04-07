@@ -2,6 +2,7 @@
     <div class="container">
         <h1>Elenco Voli</h1>
         <a href="{{ route('admin.flights.create') }}" class="btn btn-primary mb-3">Aggiungi un nuovo volo</a>
+        <a href="{{ route('admin.dashboard') }}" class="btn btn-success mb-3">Torna indietro</a>
 
         @if(session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>

@@ -11,7 +11,7 @@
     <p><strong>Prezzo Base:</strong> €{{ $flight->prezzo_base }}</p>
     @guest
         <a href="{{ route('homepage') }}" class="btn btn-primary mt-3">Torna alla home</a>
-        <a href="{{ route('bookings.create') }}" class="btn btn-primary mt-3">Prenota subito</a>
+        <a href="{{ route('booking.create', $flight->id) }}" class="btn btn-primary mt-3">Prenota subito</a>
     @endguest
 
 
