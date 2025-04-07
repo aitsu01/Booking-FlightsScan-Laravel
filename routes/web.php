@@ -32,7 +32,9 @@ Route::middleware('auth')->group(function () {
 
     });
 
+    /* Da rivedere le rotte per l'admin sono solo sperimentali dovuto ad un errote nel file kernel.php*/
 
+   /************************************************************************************************** */
 
     Route::middleware(['auth', 'is_admin'])->group(function () {
         Route::resource('/admin/flights', FlightController::class, ['as' => 'admin']);
