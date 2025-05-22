@@ -1,4 +1,4 @@
-✈️ Skyscan – Flight Booking Simulation Website
+ Skyscan – Flight Booking Simulation Website
 Skyscan is a simulated flight booking platform where users can search, view, and book flights — just like on a real airline site. The platform also includes an admin panel to manage flights, view statistics, and oversee user bookings.
 
 
@@ -42,26 +42,26 @@ https://github.com/user-attachments/assets/e99d8657-ec32-41dd-bb0f-8b19f9a8c6ec
 
 
 
-🧩 Features
+ Features
 For Users:
-🔍 Search for available flights by destination and date
+ Search for available flights by destination and date
 
-✈️ Book a selected flight
+✈ Book a selected flight
 
-📋 View personal bookings
+ View personal bookings
 
-👤 Register/login/logout securely
+ Register/login/logout securely
 
 For Admins:
-🛠️ Admin dashboard access
+🛠 Admin dashboard access
 
-✏️ Create, edit, delete flights
+✏ Create, edit, delete flights
 
-📊 View booking statistics
+ View booking statistics
 
-🧑 Manage users and bookings
+ Manage users and bookings
 
-🚀 Tech Stack
+ Tech Stack
 Laravel (backend)
 
 Blade (templating)
@@ -96,8 +96,6 @@ php artisan migrate --seed
 
 # Run the server
 php artisan serve
-
-
 
 Author :Aitsu01
 
